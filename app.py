@@ -22,7 +22,7 @@ def convert_to_pil(image_cv2):
 
 st.set_page_config(
     page_title="Image Processing App", 
-    page_icon="🧳"
+    page_icon="C:/Users/保坂 陸太/Downloads/photo_16430626.png"
 )
 
 # Streamlitアプリの設定
