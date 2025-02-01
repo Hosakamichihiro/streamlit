@@ -32,7 +32,7 @@ st.subheader("画像をアップロードして処理を試してみてくださ
 # サイドバーで操作の種類を選択
 option = st.sidebar.selectbox(
     "操作を選択してください",
-    ["オリジナル", "グレースケール", "ぼかし", "エッジ検出", "解像度アップ", "サイズ変更", "画像回転"]
+    ["オリジナル", "グレースケール", "ぼかし", "エッジ検出", "解像度アップ", "サイズ変更", "画像回転", "トリミング", "明るさ・コントラスト調整", "ノイズ除去"]
 )
 
 # 画像アップロード
@@ -82,6 +82,30 @@ if uploaded_file is not None:
         if st.button("画像を処理"):
             processed_image = rotate_image_pil(image, angle)
             #st.image(processed_image, caption="回転された画像", use_column_width=True)
+
+    elif option == "トリミング":
+    # 画像のサイズを取得
+        img_width, img_height = image.size
+
+        # トリミング範囲を選択
+        x1 = st.sidebar.slider("X1 (左上のX座標)", 0, img_width, 0)
+        y1 = st.sidebar.slider("Y1 (左上のY座標)", 0, img_height, 0)
+        x2 = st.sidebar.slider("X2 (右下のX座標)", 0, img_width, img_width)
+        y2 = st.sidebar.slider("Y2 (右下のY座標)", 0, img_height, img_height)
+
+        # トリミング実行ボタン
+        if st.button("トリミング実行"):
+            # トリミング処理
+            processed_image = image.crop((x1, y1, x2, y2))
+
+    elif option == "明るさ・コントラスト調整":
+        alpha = st.sidebar.slider("コントラスト", 0.5, 3.0, 1.0)
+        beta = st.sidebar.slider("明るさ", -100, 100, 0)
+        processed_image = cv2.convertScaleAbs(image_cv2, alpha=alpha, beta=beta)
+
+    elif option == "ノイズ除去":
+        strength = st.sidebar.slider("ノイズ除去の強さ", 1, 10, 3)
+        processed_image = cv2.fastNlMeansDenoisingColored(image_cv2, None, strength, strength, 7, 21)
 
     # OpenCV形式の画像をPillow形式に変換
     if isinstance(processed_image, np.ndarray):
