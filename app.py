@@ -32,7 +32,7 @@ st.subheader("画像をアップロードして処理を試してみてくださ
 # サイドバーで操作の種類を選択
 option = st.sidebar.selectbox(
     "操作を選択してください",
-    ["オリジナル", "グレースケール", "ぼかし", "エッジ検出", "解像度アップ", "サイズ変更", "画像回転", "トリミング", "明るさ・コントラスト調整", "ノイズ除去"]
+    ["オリジナル", "グレースケール", "ぼかし", "エッジ検出", "解像度アップ", "サイズ変更", "画像回転", "トリミング", "明るさ・コントラスト調整", "ノイズ除去", "手書き風フィルタ"]
 )
 
 # 画像アップロード
@@ -106,6 +106,10 @@ if uploaded_file is not None:
     elif option == "ノイズ除去":
         strength = st.sidebar.slider("ノイズ除去の強さ", 1, 10, 3)
         processed_image = cv2.fastNlMeansDenoisingColored(image_cv2, None, strength, strength, 7, 21)
+
+    elif option == "手書き風フィルタ":
+        gray, color = cv2.pencilSketch(image_cv2, sigma_s=60, sigma_r=0.07, shade_factor=0.05)
+        processed_image = gray
 
     # OpenCV形式の画像をPillow形式に変換
     if isinstance(processed_image, np.ndarray):
