@@ -75,11 +75,15 @@ class ImageEditor:
 
 
 # --- Streamlit UI ---
-st.set_page_config(page_title="🎬 動画・画像編集アプリ", page_icon="🎬")
+st.set_page_config(page_title="🎬🖼️ 動画・画像編集アプリ", page_icon="🎬")
 
-st.title("🎬 動画・画像編集アプリ")
+st.title("🎬🖼️ 動画・画像編集アプリ")
 option = st.sidebar.radio("編集するメディアを選択してください", ["動画編集", "画像編集"])
+def load_css():
+    with open("styles.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+load_css()
 if option == "動画編集":
     st.subheader("🎬 動画編集ツール")
     uploaded_video = st.file_uploader("📂 動画をアップロードしてください", type=["mp4", "mov", "avi", "mkv"])
