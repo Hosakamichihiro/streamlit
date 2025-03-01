@@ -25,3 +25,44 @@
     background: #6ab547;
     transition: all 0.3s;
   }
+.stDownloadButton>button{
+    font-family: 'Noto Sans JP', serif;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #2b5f2a;
+    font-weight: 700;
+    border: solid 3px #2b5f2a;
+    border-radius: 999px;
+    display: flex;
+    gap: 10px; 
+    box-sizing: border-box;
+    width: 150px;
+    height: 100px;
+    justify-content: center;
+    writing-mode: horizontal-tb; 
+    padding: 10px;
+    margin: 24px;
+    margin-inline: auto;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+.stDownloadButton>button:hover {
+    color: #f8fbf8;
+    background: #6ab547;
+    transition: all 0.3s;
+  }
+.custom-title {
+    color: #ffc000; 
+    font-size: 50px;  
+    font-weight: bold; 
+    text-align: center; 
+    text-shadow: 2px 2px 5px gray; 
+}
+
+.css-1pwfhnc {
+    border: 2px solid blue;
+    border-radius: 5px;
+    padding: 5px;
+}
+    
