@@ -75,9 +75,9 @@ class ImageEditor:
 
 
 # --- Streamlit UI ---
-st.set_page_config(page_title="🎬 総合動画・画像編集アプリ", page_icon="🎬")
+st.set_page_config(page_title="🎬 動画・画像編集アプリ", page_icon="🎬")
 
-st.title("🎬 総合動画・画像編集アプリ")
+st.title("🎬 動画・画像編集アプリ")
 option = st.sidebar.radio("編集するメディアを選択してください", ["動画編集", "画像編集"])
 
 if option == "動画編集":
@@ -98,7 +98,7 @@ if option == "動画編集":
         resize_height = st.number_input("新しい高さ (px)", min_value=100, max_value=video_editor.video.size[1], value=video_editor.video.size[1])
         extract_audio = st.checkbox("🎵 音声を抽出")
 
-        filter_option = st.selectbox("適用するフィルター", ["オリジナル", "グレースケール", "セピア", "明るさ調整", "色反転"])
+        filter_option = st.sidebar.selectbox("適用するフィルター", ["オリジナル", "グレースケール", "セピア", "明るさ調整", "色反転"])
         brightness = st.slider("明るさの強さ（1.0が通常）", 0.1, 2.0, 1.0, 0.1) if filter_option == "明るさ調整" else 1.0
 
         if st.button("編集を実行 🎬"):
@@ -128,7 +128,7 @@ elif option == "画像編集":
         image_editor = ImageEditor(image)
         st.image(image, caption="アップロードされた画像", use_container_width=True)
 
-        edit_option = st.selectbox("適用する編集", ["オリジナル", "グレースケール", "ぼかし", "エッジ検出", "回転", "明るさ調整"])
+        edit_option = st.sidebar.selectbox("適用する編集", ["オリジナル", "グレースケール", "ぼかし", "エッジ検出", "回転", "明るさ調整"])
         processed_image = image
 
         if edit_option == "グレースケール":
