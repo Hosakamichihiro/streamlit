@@ -138,11 +138,11 @@ elif option == "画像編集":
         if edit_option == "グレースケール":
             processed_image = image_editor.grayscale()
         elif edit_option == "ぼかし":
-            ksize = st.slider("ぼかしの強さ", 1, 21, 5, step=2)
+            ksize = st.sidebar.slider("ぼかしの強さ", 1, 21, 5, step=2)
             processed_image = image_editor.blur(ksize)
         elif edit_option == "エッジ検出":
-            threshold1 = st.slider("閾値1", 0, 255, 50)
-            threshold2 = st.slider("閾値2", 0, 255, 150)
+            threshold1 = st.sidebar.slider("閾値1", 0, 255, 50)
+            threshold2 = st.sidebar.slider("閾値2", 0, 255, 150)
             processed_image = image_editor.edge_detection(threshold1, threshold2)
         elif edit_option == "回転":
             angle = st.slider("回転角度", 0, 360, 0)
