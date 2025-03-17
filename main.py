@@ -147,6 +147,10 @@ elif option == "画像編集":
         elif edit_option == "回転":
             angle = st.slider("回転角度", 0, 360, 0)
             processed_image = image_editor.rotate(angle)
+        elif edit_option == "明るさ調整":
+            alpha = st.sidebar.slider("明るさ", 0.1, 3.0, 1.0, 0.1)
+            beta = st.sidebar.slider("コントラスト", -100, 100, 0)
+            processed_image = image_editor.brightness_contrast(alpha, beta)
 
         processed_image_pil = image_editor.convert_to_pil(processed_image)
         st.image(processed_image_pil, caption="加工後の画像", use_container_width=True)
